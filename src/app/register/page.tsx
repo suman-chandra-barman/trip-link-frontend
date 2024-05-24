@@ -19,6 +19,8 @@ import { useState } from "react";
 import TBForm from "@/components/Forms/TBForm";
 import TBInput from "@/components/Forms/TBInput";
 import TBSelect from "@/components/Forms/TBSelect";
+import userRegister from "@/services/actions/userRegister";
+import { toast } from "sonner";
 
 const profileValidationSchema = z.object({
   contactNumber: z
@@ -48,7 +50,25 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const handleRegister = async (data: FieldValues) => {
-    console.log("reg data", data);
+    const registerData = {
+      ...data,
+      profile: {
+        gender: data?.profile?.gender.toUpperCase(),
+        age: Number(data?.profile?.age),
+        contactNumber: data?.profile?.contactNumber,
+      },
+    };
+    try {
+      const res = await userRegister(registerData);
+      if (res.success) {
+        toast.success(res.message);
+        router.push("/login");
+      } else {
+        setError(res.message);
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (
@@ -84,7 +104,7 @@ const RegisterPage = () => {
             fontWeight={600}
             my={1}
           >
-            Patient Register
+            Travel Buddy Register
           </Typography>
 
           {error && (

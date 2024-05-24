@@ -17,8 +17,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
-// import { toast } from "sonner";
 import { z } from "zod";
+import userLogin from "@/services/actions/userLogin";
+import { storeUserInfo } from "@/services/auth.service";
+import { toast } from "sonner";
 
 const loginValidationSchema = z.object({
   usernameOrEmail: z.string({
@@ -32,19 +34,19 @@ const LoginPage = () => {
   const router = useRouter();
 
   const handleLogin = async (data: FieldValues) => {
-    console.log("data", data);
-    // try {
-    //   const res = await userLogin(data);
-    //   if (res.success) {
-    //     storeUserInfo(res?.data?.accessToken);
-    //     router.push("/dashboard");
-    //     toast.success(res.message);
-    //   } else {
-    //     setError(res.message);
-    //   }
-    // } catch (error: any) {
-    //   console.error(error);
-    // }
+    try {
+      const res = await userLogin(data);
+      if (res.success) {
+        setError("");
+        storeUserInfo(res?.data?.token);
+        router.push("/");
+        toast.success(res.message);
+      } else {
+        setError(res.message);
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (
