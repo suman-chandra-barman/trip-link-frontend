@@ -1,13 +1,14 @@
-import { Button } from "@mui/material";
+import Navbar from "@/components/Shared/Navbar";
+import HeroSection from "@/components/Home/HeroSection";
+import FindTravelBuddy from "@/components/Home/FindTravelBuddy";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>This is Home page</h1>
-      <Button>Text</Button>
-      <Button>Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </div>
+    <>
+      <Navbar />
+      <HeroSection />
+      <FindTravelBuddy />
+    </>
   );
 };
 

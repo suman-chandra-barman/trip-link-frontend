@@ -20,7 +20,7 @@ const TBInput = ({
   label,
   margin = "dense",
   type = "text",
-  size = "small",
+  size = "medium",
   fullWidth = true,
   sx,
   placeholder,

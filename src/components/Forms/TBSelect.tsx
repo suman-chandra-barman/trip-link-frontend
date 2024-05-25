@@ -17,7 +17,7 @@ const TBSelect = ({
   name,
   label,
   items,
-  size = "small",
+  size = "medium",
   fullWidth = true,
   sx,
   required,

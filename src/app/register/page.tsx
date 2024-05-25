@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpg";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,6 @@ const profileValidationSchema = z.object({
     .string({ required_error: "Contact number is required" })
     .regex(/^\d{11}$/, { message: "Provide 11 digit valid phone number!" }),
   gender: z.string({ required_error: "Gender is required" }),
-  age: z.string({ required_error: "Age is required" }),
 });
 
 const registerValidationSchema = z.object({
@@ -42,6 +41,9 @@ const registerValidationSchema = z.object({
   password: z
     .string({ required_error: "Password is required!" })
     .min(5, { message: "Must be 5 or more characters long!" }),
+  confirmPassword: z
+    .string({ required_error: "Confirm password is required!" })
+    .min(5, { message: "Must be 5 or more characters long!" }),
   profile: profileValidationSchema,
 });
 
@@ -50,24 +52,32 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const handleRegister = async (data: FieldValues) => {
-    const registerData = {
-      ...data,
-      profile: {
-        gender: data?.profile?.gender.toUpperCase(),
-        age: Number(data?.profile?.age),
-        contactNumber: data?.profile?.contactNumber,
-      },
-    };
-    try {
-      const res = await userRegister(registerData);
-      if (res.success) {
-        toast.success(res.message);
-        router.push("/login");
-      } else {
-        setError(res.message);
+    const { username, email, password, confirmPassword, profile } = data;
+
+    if (password === confirmPassword) {
+      const registerData = {
+        username,
+        email,
+        password,
+        profile: {
+          contactNumber: profile?.contactNumber,
+          gender: profile?.gender.toUpperCase(),
+        },
+      };
+
+      try {
+        const res = await userRegister(registerData);
+        if (res.success) {
+          toast.success(res.message);
+          router.push("/login");
+        } else {
+          setError(res.message);
+        }
+      } catch (error: any) {
+        console.error(error);
       }
-    } catch (error: any) {
-      console.error(error);
+    } else {
+      setError("Password and confirm password not match!");
     }
   };
 
@@ -82,7 +92,7 @@ const RegisterPage = () => {
       >
         <Box
           sx={{
-            maxWidth: "700px",
+            maxWidth: "800px",
             width: "100%",
             boxShadow: 1,
             borderRadius: 2,
@@ -95,7 +105,7 @@ const RegisterPage = () => {
               justifyContent: "center",
             }}
           >
-            <Avatar alt="logo" src={logo.src} sx={{ width: 56, height: 56 }} />
+            <Avatar alt="logo" src={logo.src} sx={{ width: 60, height: 60 }} />
           </Box>
           <Typography
             variant="h5"
@@ -104,7 +114,7 @@ const RegisterPage = () => {
             fontWeight={600}
             my={1}
           >
-            Travel Buddy Register
+            TripLink Register
           </Typography>
 
           {error && (
@@ -141,6 +151,13 @@ const RegisterPage = () => {
               </Grid>
               <Grid item lg={6}>
                 <TBInput
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                />
+              </Grid>
+              <Grid item lg={6}>
+                <TBInput
                   name="profile.contactNumber"
                   label="Contract Number"
                   type="tel"
@@ -152,9 +169,6 @@ const RegisterPage = () => {
                   label="Gender"
                   items={["Male", "Female", "Other"]}
                 />
-              </Grid>
-              <Grid item lg={6}>
-                <TBInput name="profile.age" label="Age" type="number" />
               </Grid>
             </Grid>
             <Button

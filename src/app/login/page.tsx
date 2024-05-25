@@ -2,7 +2,7 @@
 
 import TBForm from "@/components/Forms/TBForm";
 import TBInput from "@/components/Forms/TBInput";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Avatar,
@@ -73,7 +73,7 @@ const LoginPage = () => {
               justifyContent: "center",
             }}
           >
-            <Avatar alt="logo" src={logo.src} sx={{ width: 56, height: 56 }} />
+            <Avatar alt="logo" src={logo.src} sx={{ width: 60, height: 60 }} />
           </Box>
           <Typography
             variant="h5"
@@ -82,7 +82,7 @@ const LoginPage = () => {
             fontWeight={600}
             my={1}
           >
-            Travel Buddy Login
+            TripLink Login
           </Typography>
           {error && (
             <Typography
