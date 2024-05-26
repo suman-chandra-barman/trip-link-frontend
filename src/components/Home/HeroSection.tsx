@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { styled } from "@mui/system";
 import banner from "@/assets/images/banner.jpg";
+import Link from "next/link";
 
 const HeroContainer = styled(Box)({
   position: "relative",
@@ -62,9 +63,12 @@ const HeroSection = () => {
             Discover a new and authentic way of traveling. Find Travel Buddies
             who fit your travel style and discover the world together.
           </Typography>
-          <Button size="large" sx={{ mt: 3 }}>
-            Share Your Trip
-          </Button>
+
+          <Link href="/trip" style={{ color: "white", textDecoration: "none" }}>
+            <Button size="large" sx={{ mt: 3 }}>
+              Share Your Trip
+            </Button>
+          </Link>
         </HeroContent>
       </Container>
     </HeroContainer>

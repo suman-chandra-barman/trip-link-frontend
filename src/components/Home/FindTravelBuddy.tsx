@@ -6,20 +6,23 @@ import {
   Box,
   Button,
   Container,
+  Grid,
   InputAdornment,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import TripCard from "../Cards/TripCard";
+import { TTrip } from "@/types";
 
 const FindTravelBuddy = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { data, isLoading } = useGetAllTripsQuery({});
+  const { data: trips, isLoading } = useGetAllTripsQuery({});
 
   const handleSearch = () => {
     console.log("Search term:", searchTerm);
-    console.log("Trips data:", data);
+    console.log("Trips data:", trips);
     setSearchTerm("");
   };
 
@@ -82,6 +85,18 @@ const FindTravelBuddy = () => {
             Search
           </Button>
         </Stack>
+
+        {/* Show trips */}
+        <Grid container spacing={3} mt={3}>
+          {trips &&
+            trips.map((trip: TTrip, idx: string) => (
+              <>
+                <Grid item xs={12} md={6} lg={4}>
+                  <TripCard key={idx} trip={trip} />
+                </Grid>
+              </>
+            ))}
+        </Grid>
       </Container>
     </Box>
   );

@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import { getUserInfo } from "@/services/auth.service";
 
 const pages = [
   { route: "home", page: "Home" },
@@ -19,9 +20,12 @@ const pages = [
   { route: "login", page: "Login" },
   { route: "register", page: "Register" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const myProfiles = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
+  const user = getUserInfo();
+  console.log("user", user);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -154,35 +158,56 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="My Profile">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {user?.username && (
+            <>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="My Profile">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt={user?.username.toUpperCase()}
+                      src="/static/images/avatar/2.jpg"
+                      sx={{
+                        color: "primary.main",
+                        fontWeight: "bold",
+                        backgroundColor: "white",
+                        fontSize: "25px",
+                      }}
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {myProfiles.map((profile) => (
+                    <MenuItem key={profile} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{profile}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              {/* <Button
+                size="medium"
+                color="error"
+                startIcon={<DeleteIcon />}
+                sx={{ paddingLeft: "10px", paddingRight: "10px", ml: "10px" }}
+              >
+                Logout
+              </Button> */}
+            </>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

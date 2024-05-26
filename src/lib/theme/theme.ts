@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#40a737",
+      main: "#0a3f5f",
     },
     secondary: {
       main: "#666f73",
@@ -13,7 +13,6 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: {
         variant: "contained",
-        color: "success",
         size: "large",
       },
       styleOverrides: {
@@ -22,6 +21,7 @@ export const theme = createTheme({
           paddingRight: "30px",
           textTransform: "capitalize",
           fontSize: "16px",
+          text: "#0a3f5f",
         },
       },
     },
