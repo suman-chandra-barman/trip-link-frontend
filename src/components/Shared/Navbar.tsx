@@ -1,5 +1,6 @@
 "use client";
-import * as React from "react";
+
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,25 +14,36 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import { getUserInfo } from "@/services/auth.service";
-
-const pages = [
-  { route: "home", page: "Home" },
-  { route: "about", page: "About Us" },
-  { route: "login", page: "Login" },
-  { route: "register", page: "Register" },
-];
-const myProfiles = ["Profile", "Account", "Dashboard", "Logout"];
+import { TAuthUser } from "@/types";
 
 function Navbar() {
-  const user = getUserInfo();
-  console.log("user", user);
+  const [user, setUser] = useState<TAuthUser>();
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  let pages = [
+    { route: "/", page: "Home" },
+    { route: "about", page: "About Us" },
+    { route: "login", page: "Login" },
+    { route: "register", page: "Register" },
+  ];
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userInfo = getUserInfo();
+      setUser(userInfo);
+    }
+  }, []);
+
+  //add page base user
+  if (user && user?.email) {
+    pages = [
+      { route: "/", page: "Home" },
+      { route: "about", page: "About Us" },
+      { route: "dashboard", page: "Dashboard" },
+    ];
+  }
+
+  console.log(user);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -49,10 +61,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/" style={{ color: "black", textDecoration: "none" }}>
             <Typography
               variant="h6"
               noWrap
@@ -63,12 +75,14 @@ function Navbar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".1rem",
-                color: "inherit",
                 textDecoration: "none",
                 fontSize: "25px",
               }}
             >
-              TripLink
+              Trip
+              <Box component="span" sx={{ color: "primary.main" }}>
+                Link
+              </Box>
             </Typography>
           </Link>
 
@@ -105,7 +119,7 @@ function Navbar() {
                 <MenuItem key={page.route} onClick={handleCloseNavMenu}>
                   <Link
                     href={`/${page.route}`}
-                    style={{ color: "#0B1134CC", textDecoration: "none" }}
+                    style={{ color: "black", textDecoration: "none" }}
                   >
                     <Typography textAlign="center">{page.page}</Typography>
                   </Link>
@@ -113,7 +127,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <Link href="/" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/" style={{ color: "black", textDecoration: "none" }}>
             <Typography
               variant="h6"
               noWrap
@@ -125,7 +139,6 @@ function Navbar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".1rem",
-                color: "inherit",
                 textDecoration: "none",
                 fontSize: "22px",
               }}
@@ -146,11 +159,11 @@ function Navbar() {
               <Typography
                 key={page.route}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx: 1, color: "white", display: "block" }}
+                sx={{ my: 2, mx: 1, color: "black", display: "block" }}
               >
                 <Link
                   href={`/${page.route}`}
-                  style={{ color: "white", textDecoration: "none" }}
+                  style={{ color: "black", textDecoration: "none" }}
                 >
                   {page.page}
                 </Link>
@@ -167,10 +180,10 @@ function Navbar() {
                       alt={user?.username.toUpperCase()}
                       src="/static/images/avatar/2.jpg"
                       sx={{
-                        color: "primary.main",
-                        fontWeight: "bold",
-                        backgroundColor: "white",
-                        fontSize: "25px",
+                        backgroundColor: "primary.main",
+                        fontSize: "20px",
+                        width: 30,
+                        height: 30,
                       }}
                     />
                   </IconButton>
@@ -191,21 +204,19 @@ function Navbar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {myProfiles.map((profile) => (
-                    <MenuItem key={profile} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{profile}</Typography>
+                  <Box onClick={handleCloseUserMenu}>
+                    <MenuItem>
+                      <Typography>Edit Profile</Typography>
                     </MenuItem>
-                  ))}
+                    <MenuItem>
+                      <Typography>Change Password</Typography>
+                    </MenuItem>
+                    <MenuItem>
+                      <Typography>Logout</Typography>
+                    </MenuItem>
+                  </Box>
                 </Menu>
               </Box>
-              {/* <Button
-                size="medium"
-                color="error"
-                startIcon={<DeleteIcon />}
-                sx={{ paddingLeft: "10px", paddingRight: "10px", ml: "10px" }}
-              >
-                Logout
-              </Button> */}
             </>
           )}
         </Toolbar>

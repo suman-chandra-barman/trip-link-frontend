@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
-import logo from "@/assets/logo.jpg";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -99,14 +90,6 @@ const RegisterPage = () => {
             p: 4,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Avatar alt="logo" src={logo.src} sx={{ width: 60, height: 60 }} />
-          </Box>
           <Typography
             variant="h5"
             component="h2"

@@ -25,11 +25,9 @@ const Footer = () => {
                   component="p"
                   sx={{
                     mr: 2,
-                    display: { xs: "none", md: "flex" },
                     fontFamily: "monospace",
                     fontWeight: 700,
                     letterSpacing: ".1rem",
-                    color: "inherit",
                     textDecoration: "none",
                     fontSize: "25px",
                   }}
@@ -181,8 +179,12 @@ const Footer = () => {
             </Link>
           </Grid>
         </Grid>
-        <Typography variant="body2" sx={{ mt: 4, textAlign: "center" }}>
-          Copyright © 2024 The TripLink. All Rights Reserved
+        <Typography
+          variant="body2"
+          sx={{ mt: 4, textAlign: { xs: "start", md: "center" } }}
+        >
+          &copy; 2024 The TripLink. Connecting You to Your Next Adventure. All
+          rights reserved.
         </Typography>
       </Container>
     </Box>

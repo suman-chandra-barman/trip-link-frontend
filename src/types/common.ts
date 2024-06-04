@@ -19,3 +19,11 @@ export type TGenericErrorResponse = {
   message: string;
   errorMessages: TGenericErrorMessage;
 };
+
+export type TAuthUser = {
+  username: string;
+  email: string;
+  role: "admin" | "user";
+  iat: number;
+  exp: number;
+};

@@ -6,6 +6,6 @@ export const dateConverter = (date: string) => {
   const year = currentDate.getFullYear();
 
   // Format the date as "date-month-year"
-  const formattedDate = `${day}-${month}-${year}`;
+  const formattedDate = `${day}/${month}/${year}`;
   return formattedDate;
 };

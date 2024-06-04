@@ -2,17 +2,8 @@
 
 import TBForm from "@/components/Forms/TBForm";
 import TBInput from "@/components/Forms/TBInput";
-import logo from "@/assets/logo.jpg";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -67,14 +58,6 @@ const LoginPage = () => {
             p: 4,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Avatar alt="logo" src={logo.src} sx={{ width: 60, height: 60 }} />
-          </Box>
           <Typography
             variant="h5"
             component="h2"

@@ -1,13 +1,16 @@
 "use client";
 
 import { useGetAllTripsQuery } from "@/redux/features/trips/tripsApi";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   Button,
   Container,
+  FormControl,
   Grid,
   InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -40,18 +43,28 @@ const FindTravelBuddy = () => {
           variant="h3"
           fontWeight="600"
           textAlign="center"
+          sx={{
+            fontSize: {
+              xs: "1.5rem",
+              sm: "2rem",
+              md: "2.5rem",
+              lg: "3rem",
+              xl: "3.5rem",
+            },
+          }}
         >
           Find your next Travel Buddy right here!
         </Typography>
-
+        {/* 
         <Stack direction="row" mt="30px" justifyContent="center">
           <TextField
             variant="outlined"
-            placeholder="Search..."
+            placeholder="Search here..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={handleKeyDown}
             fullWidth
+            size="medium"
             sx={{
               maxWidth: "500px",
               borderRight: "0px",
@@ -84,6 +97,58 @@ const FindTravelBuddy = () => {
           >
             Search
           </Button>
+        </Stack> */}
+        <Stack direction="row" mt="30px" justifyContent="center" spacing={2}>
+          <TextField
+            variant="outlined"
+            placeholder="Destination"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            fullWidth
+            size="medium"
+            sx={{ maxWidth: "200px" }}
+          />
+          <TextField
+            variant="outlined"
+            placeholder="Start Date"
+            type="date"
+            // value={startDate}
+            // onChange={(e) => setStartDate(e.target.value)}
+            fullWidth
+            size="medium"
+            InputLabelProps={{ shrink: true }}
+            sx={{ maxWidth: "200px" }}
+          />
+
+          <FormControl fullWidth size="medium" sx={{ maxWidth: "200px" }}>
+            <InputLabel>Travel Type</InputLabel>
+            <Select
+              // value={travelType}
+              // onChange={(e) => setTravelType(e.target.value)}
+              label="Travel Type"
+            >
+              <MenuItem value="business">Business</MenuItem>
+              <MenuItem value="leisure">Leisure</MenuItem>
+              <MenuItem value="adventure">Adventure</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            variant="outlined"
+            placeholder="Keywords in Description"
+            // value={description}
+            // onChange={(e) => setDescription(e.target.value)}
+            fullWidth
+            size="medium"
+            sx={{ maxWidth: "215px" }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSearch}
+            sx={{ height: "56px" }}
+          >
+            Search
+          </Button>
         </Stack>
 
         {/* Show trips */}
@@ -91,11 +156,14 @@ const FindTravelBuddy = () => {
           {trips &&
             trips.map((trip: TTrip, idx: string) => (
               <>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid key={idx} item xs={12} md={4}>
                   <TripCard key={idx} trip={trip} />
                 </Grid>
               </>
             ))}
+          <Box textAlign="center" width="100%" mt={6}>
+            <Button>See More</Button>
+          </Box>
         </Grid>
       </Container>
     </Box>

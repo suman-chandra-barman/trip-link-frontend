@@ -11,18 +11,20 @@ import { dateConverter } from "@/utils/dateConverter";
 
 export default function TripCard({ trip }: { trip: TTrip }) {
   const startDate = dateConverter(trip.startDate);
-  const endDate = dateConverter(trip.startDate);
-  console.log("t", trip);
-
+  const endDate = dateConverter(trip.endDate);
   return (
-    <Card>
+    <Card sx={{ height: 390 }}>
       <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
+        sx={{ height: 150 }}
+        image={trip?.photos[0]}
         title="green iguana"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ minHeight: 40, maxHeight: 50 }}
+        >
           {trip?.description.slice(0, 100)}
           {" ...More"}
         </Typography>
@@ -31,28 +33,20 @@ export default function TripCard({ trip }: { trip: TTrip }) {
           <Typography variant="body2" component="p">
             Destination:
           </Typography>
-          <Typography variant="body1" component="p" fontWeight={600}>
+          <Typography variant="body1" component="p" fontWeight={500}>
             {trip.destination}
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="space-between" mt={1}>
           <Typography variant="body2" component="p">
-            Journey Start:
+            Dates:
           </Typography>
-          <Typography variant="body1" component="p" fontWeight={600}>
-            {startDate}
-          </Typography>
-        </Stack>
-        <Stack direction="row" justifyContent="space-between" mt={1}>
-          <Typography variant="body2" component="p">
-            Journey End:
-          </Typography>
-          <Typography variant="body1" component="p" fontWeight={600}>
-            {endDate}
+          <Typography variant="body1" component="p" fontWeight={500}>
+            {startDate} to {endDate}
           </Typography>
         </Stack>
       </CardContent>
-      <CardActions sx={{ mb: "10px" }}>
+      <CardActions>
         <Button size="medium" fullWidth>
           View Details
         </Button>

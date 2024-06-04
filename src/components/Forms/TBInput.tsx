@@ -13,6 +13,14 @@ type TTBInputProps = {
   required?: boolean;
   autoComplete?: string;
   autoFocus?: boolean;
+  multiline?: boolean;
+  rows?: number;
+  InputLabelProps?: object;
+  InputProps?: object;
+  defaultValue?: any;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 };
 
 const TBInput = ({
@@ -27,12 +35,19 @@ const TBInput = ({
   required,
   autoComplete,
   autoFocus,
+  multiline = false,
+  rows,
+  InputLabelProps,
+  onChange,
+  InputProps,
+  defaultValue,
 }: TTBInputProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name={name}
+      defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
@@ -45,10 +60,20 @@ const TBInput = ({
           placeholder={placeholder}
           required={required}
           margin={margin}
+          multiline={multiline}
+          rows={rows}
+          InputLabelProps={InputLabelProps}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
           error={!!error?.message}
           helperText={error?.message}
+          InputProps={InputProps}
+          onChange={(e) => {
+            const value =
+              type === "number" ? Number(e.target.value) : e.target.value;
+            field.onChange(value);
+            if (onChange) onChange(e);
+          }}
         />
       )}
     />
