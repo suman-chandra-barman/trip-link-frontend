@@ -35,6 +35,7 @@ axiosInstance.interceptors.response.use(
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
+
     return resObj;
   },
   function (error) {

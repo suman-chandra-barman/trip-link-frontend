@@ -7,7 +7,6 @@ import {
   Container,
   FormControl,
   Grid,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -22,6 +21,7 @@ import { TTrip } from "@/types";
 const FindTravelBuddy = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: trips, isLoading } = useGetAllTripsQuery({});
+  console.log({ trips });
 
   const handleSearch = () => {
     console.log("Search term:", searchTerm);
@@ -98,7 +98,7 @@ const FindTravelBuddy = () => {
             Search
           </Button>
         </Stack> */}
-        <Stack direction="row" mt="30px" justifyContent="center" spacing={2}>
+        <Stack direction="row" mt="30px" spacing={1} justifyContent="center">
           <TextField
             variant="outlined"
             placeholder="Destination"
@@ -132,15 +132,6 @@ const FindTravelBuddy = () => {
               <MenuItem value="adventure">Adventure</MenuItem>
             </Select>
           </FormControl>
-          <TextField
-            variant="outlined"
-            placeholder="Keywords in Description"
-            // value={description}
-            // onChange={(e) => setDescription(e.target.value)}
-            fullWidth
-            size="medium"
-            sx={{ maxWidth: "215px" }}
-          />
           <Button
             variant="contained"
             color="primary"

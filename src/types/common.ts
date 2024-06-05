@@ -27,3 +27,8 @@ export type TAuthUser = {
   iat: number;
   exp: number;
 };
+
+export type TQueryParam = {
+  name: string;
+  value: boolean | React.Key;
+};

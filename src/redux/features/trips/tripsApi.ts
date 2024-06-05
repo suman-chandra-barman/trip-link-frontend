@@ -1,4 +1,5 @@
 import { baseApi } from "@/redux/api/baseApi";
+import { TMeta, TQueryParam } from "@/types";
 
 const tripsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,13 +12,30 @@ const tripsApi = baseApi.injectEndpoints({
           data,
         };
       },
+
       invalidatesTags: ["trips"],
     }),
     getAllTrips: builder.query({
-      query: () => ({
-        url: "/trips",
-        method: "GET",
-      }),
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: `/trips`,
+          method: "GET",
+          params: params,
+        };
+      },
+      transformResponse: (response: [], meta: TMeta) => {
+        return {
+          trips: response,
+          meta,
+        };
+      },
       providesTags: ["trips"],
     }),
     deleteTrip: builder.mutation({
