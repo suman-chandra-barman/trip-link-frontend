@@ -63,7 +63,10 @@ const HeroSection = () => {
             who fit your travel style and discover the world together.
           </Typography>
 
-          <Link href="/trip" style={{ color: "white", textDecoration: "none" }}>
+          <Link
+            href="/trip/post-trip"
+            style={{ color: "white", textDecoration: "none" }}
+          >
             <Button size="large" sx={{ mt: 3 }}>
               Share Your Trip
             </Button>

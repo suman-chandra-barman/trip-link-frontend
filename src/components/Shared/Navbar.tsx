@@ -12,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import { getUserInfo } from "@/services/auth.service";
+import { deleteUser, getUserInfo } from "@/services/auth.service";
 import { TAuthUser } from "@/types";
 import { Divider, ListItemIcon } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
@@ -21,12 +21,14 @@ import LockIcon from "@mui/icons-material/Lock";
 import HistoryIcon from "@mui/icons-material/History";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/navigation";
 
 function Navbar() {
   const [user, setUser] = useState<TAuthUser>();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const router = useRouter();
   const open = Boolean(anchorElUser);
   let pages = [
     { route: "/", page: "Home" },
@@ -46,12 +48,14 @@ function Navbar() {
   if (user && user?.email) {
     pages = [
       { route: "/", page: "Home" },
+      { route: "trip", page: "All Trips" },
       { route: "about", page: "About Us" },
-      { route: "dashboard", page: "Dashboard" },
     ];
   }
-
-  console.log(user);
+  //if user role admin
+  if (user && user?.role === "admin") {
+    pages.push({ route: "dashboard", page: "Dashboard" });
+  }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -64,6 +68,11 @@ function Navbar() {
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    deleteUser();
+    router.push("/login");
   };
 
   return (
@@ -186,7 +195,7 @@ function Navbar() {
                   textAlign: "center",
                 }}
               >
-                <Tooltip title="Account settings">
+                <Tooltip title="Account">
                   <IconButton
                     onClick={handleOpenUserMenu}
                     size="small"
@@ -284,7 +293,7 @@ function Navbar() {
                   </MenuItem>
                 </Link>
                 <Divider />
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
                     <Logout />
                   </ListItemIcon>

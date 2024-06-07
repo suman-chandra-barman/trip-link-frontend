@@ -1,5 +1,4 @@
 "use client";
-
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -14,6 +13,8 @@ import { TripValidationSchema } from "@/schemas/trip.validation";
 import uploadImageToImgBB from "@/utils/uploadImageToImgBB";
 import { useCreateTripMutation } from "@/redux/features/trips/tripsApi";
 import formatDateString from "@/utils/formatDateString";
+import { TAuthUser } from "@/types";
+import { isUserLoggedIn } from "@/services/auth.service";
 
 const tripTypes = ["Adventure", "Leisure", "Business"];
 
@@ -22,9 +23,10 @@ const TripCreatePage = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [itineraryDays, setItineraryDays] = useState(1);
-  const router = useRouter();
 
   const [createTrip, { isLoading }] = useCreateTripMutation();
+
+  const router = useRouter();
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -34,6 +36,10 @@ const TripCreatePage = () => {
       setItineraryDays(days > 1 ? days : 1);
     }
   }, [startDate, endDate]);
+
+  if (!isUserLoggedIn()) {
+    return router.push("/login");
+  }
 
   const handleCreateTrip = async (data: FieldValues) => {
     try {
@@ -188,7 +194,7 @@ const TripCreatePage = () => {
                 ))}
               </Grid>
             </Grid>
-            <Button type="submit" sx={{ my: 2 }}>
+            <Button size="large" type="submit" sx={{ my: 2 }}>
               Create Trip Post
             </Button>
           </TBForm>

@@ -59,7 +59,7 @@ const TravelPostPage = () => {
       <Typography variant="h4">My Travel Posts</Typography>
       {!travelPosts.length && (
         <Typography variant="h6">
-          You have not send any travel request!
+          You have not send any travel request
         </Typography>
       )}
       <TableContainer
