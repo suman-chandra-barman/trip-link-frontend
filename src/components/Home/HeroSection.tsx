@@ -16,7 +16,6 @@ const HeroContainer = styled(Box)({
   backgroundImage: `url(${banner.src})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
-  top: "55px",
   "&::before": {
     content: '""',
     position: "absolute",

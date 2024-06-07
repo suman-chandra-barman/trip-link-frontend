@@ -12,8 +12,9 @@ import { dateConverter } from "@/utils/dateConverter";
 export default function TripCard({ trip }: { trip: TTrip }) {
   const startDate = dateConverter(trip.startDate);
   const endDate = dateConverter(trip.endDate);
+
   return (
-    <Card sx={{ height: 390 }}>
+    <Card sx={{ minHeight: 410 }}>
       <CardMedia
         sx={{ height: 150 }}
         image={trip?.photos[0]}
@@ -23,7 +24,8 @@ export default function TripCard({ trip }: { trip: TTrip }) {
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{ minHeight: 40, maxHeight: 50 }}
+          textAlign="justify"
+          sx={{ minHeight: 50, maxHeight: 70 }}
         >
           {trip?.description.slice(0, 100)}
           {" ...More"}
@@ -47,7 +49,7 @@ export default function TripCard({ trip }: { trip: TTrip }) {
         </Stack>
       </CardContent>
       <CardActions>
-        <Button size="medium" fullWidth>
+        <Button size="medium" fullWidth href={`/trip/${trip.id}`}>
           View Details
         </Button>
       </CardActions>

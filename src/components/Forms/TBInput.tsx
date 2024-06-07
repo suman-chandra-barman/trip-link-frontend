@@ -18,6 +18,7 @@ type TTBInputProps = {
   InputLabelProps?: object;
   InputProps?: object;
   defaultValue?: any;
+  rules?: object;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -41,12 +42,14 @@ const TBInput = ({
   onChange,
   InputProps,
   defaultValue,
+  rules,
 }: TTBInputProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name={name}
+      rules={rules}
       defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <TextField

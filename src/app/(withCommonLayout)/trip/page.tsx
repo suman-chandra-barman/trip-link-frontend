@@ -11,9 +11,7 @@ import {
   Button,
   CircularProgress,
   Container,
-  FormControl,
   Grid,
-  InputLabel,
   MenuItem,
   Pagination,
   Select,
@@ -48,11 +46,6 @@ const TripPage = () => {
     }
   };
 
-  // const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-  //   if (event.key === "Enter") {
-  //     handleSearch();
-  //   }
-  // };
   return (
     <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 30 }}>
       <Box>
@@ -131,27 +124,33 @@ const TripPage = () => {
         <Grid item xs={12} md={8}>
           {/* Show trips */}
           <Grid container spacing={3} mt={3}>
-            <Grid item lg={12} textAlign="end">
+            <Grid item lg={12} textAlign="center">
               <Stack
                 direction="row"
-                justifyContent="end"
+                justifyContent="space-between"
                 alignItems="center"
                 spacing={2}
               >
-                <Typography fontWeight={600}>Show</Typography>
-                <Select
-                  value={limit}
-                  size="small"
-                  onChange={(e) => setLimit(e.target.value as number)}
-                  sx={{ width: 80 }}
-                >
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                  <MenuItem value={30}>30</MenuItem>
-                  <MenuItem value={40}>40</MenuItem>
-                  <MenuItem value={50}>50</MenuItem>
-                </Select>
+                <Typography variant="h5" fontWeight={600} color="primary">
+                  Total: {meta?.total} Trips
+                </Typography>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <Typography fontWeight={600}>Show</Typography>
+                  <Select
+                    value={limit}
+                    size="small"
+                    onChange={(e) => setLimit(e.target.value as number)}
+                    sx={{ width: 80 }}
+                  >
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={15}>15</MenuItem>
+                    <MenuItem value={20}>20</MenuItem>
+                    <MenuItem value={30}>30</MenuItem>
+                    <MenuItem value={40}>40</MenuItem>
+                    <MenuItem value={50}>50</MenuItem>
+                  </Select>
+                </Stack>
               </Stack>
             </Grid>
 

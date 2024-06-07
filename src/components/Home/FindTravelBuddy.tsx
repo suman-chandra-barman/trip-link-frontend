@@ -1,37 +1,25 @@
 "use client";
 
 import { useGetAllTripsQuery } from "@/redux/features/trips/tripsApi";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import TripCard from "../Cards/TripCard";
-import { TTrip } from "@/types";
+import { TQueryParam, TTrip } from "@/types";
+import { FieldValues } from "react-hook-form";
+import TBInput from "../Forms/TBInput";
+import TBForm from "../Forms/TBForm";
+import TBSelect from "../Forms/TBSelect";
 
 const FindTravelBuddy = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const { data: trips, isLoading } = useGetAllTripsQuery({});
-  console.log({ trips });
+  const [params, setParams] = useState<TQueryParam[]>([]);
+  const { data, isLoading } = useGetAllTripsQuery([...params]);
+  const trips = data?.trips;
+  console.log({ data });
 
-  const handleSearch = () => {
-    console.log("Search term:", searchTerm);
-    console.log("Trips data:", trips);
-    setSearchTerm("");
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter") {
-      handleSearch();
+  const handleSearch = (values: FieldValues) => {
+    if (values?.destination) {
+      const value = [{ name: "searchTerm", value: values?.destination }];
+      setParams(value);
     }
   };
 
@@ -55,97 +43,40 @@ const FindTravelBuddy = () => {
         >
           Find your next Travel Buddy right here!
         </Typography>
-        {/* 
-        <Stack direction="row" mt="30px" justifyContent="center">
-          <TextField
-            variant="outlined"
-            placeholder="Search here..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleKeyDown}
-            fullWidth
-            size="medium"
-            sx={{
-              maxWidth: "500px",
-              borderRight: "0px",
-              borderTopRightRadius: 0,
-              borderBottomRightRadius: 0,
-              "& fieldset": {
-                borderRight: "0px",
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSearch}
-            sx={{
-              height: "56px",
-              borderTopLeftRadius: 0,
-              borderBottomLeftRadius: 0,
-              borderLeft: "0px",
-            }}
-          >
-            Search
-          </Button>
-        </Stack> */}
-        <Stack direction="row" mt="30px" spacing={1} justifyContent="center">
-          <TextField
-            variant="outlined"
-            placeholder="Destination"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            fullWidth
-            size="medium"
-            sx={{ maxWidth: "200px" }}
-          />
-          <TextField
-            variant="outlined"
-            placeholder="Start Date"
-            type="date"
-            // value={startDate}
-            // onChange={(e) => setStartDate(e.target.value)}
-            fullWidth
-            size="medium"
-            InputLabelProps={{ shrink: true }}
-            sx={{ maxWidth: "200px" }}
-          />
 
-          <FormControl fullWidth size="medium" sx={{ maxWidth: "200px" }}>
-            <InputLabel>Travel Type</InputLabel>
-            <Select
-              // value={travelType}
-              // onChange={(e) => setTravelType(e.target.value)}
-              label="Travel Type"
-            >
-              <MenuItem value="business">Business</MenuItem>
-              <MenuItem value="leisure">Leisure</MenuItem>
-              <MenuItem value="adventure">Adventure</MenuItem>
-            </Select>
-          </FormControl>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSearch}
-            sx={{ height: "56px" }}
-          >
-            Search
-          </Button>
+        <Stack direction="row" mt="30px" spacing={1} justifyContent="center">
+          <TBForm onSubmit={handleSearch}>
+            <Stack direction="row" justifyContent="center" spacing={2}>
+              <TBInput name="destination" placeholder="Enter destination" />
+              <TBInput
+                name="date"
+                type="date"
+                label="Date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TBSelect
+                name="travelType"
+                label="Type of Travel"
+                items={["Adventure", "Leisure", "Business"]}
+              />
+              <TBInput
+                name="description"
+                placeholder="Search Keywords in Description"
+              />
+
+              <Button type="submit" sx={{ height: "56px" }}>
+                Search
+              </Button>
+            </Stack>
+          </TBForm>
         </Stack>
 
         {/* Show trips */}
         <Grid container spacing={3} mt={3}>
           {trips &&
-            trips.map((trip: TTrip, idx: string) => (
+            trips.map((trip: TTrip, idx: number) => (
               <>
                 <Grid key={idx} item xs={12} md={4}>
                   <TripCard key={idx} trip={trip} />
