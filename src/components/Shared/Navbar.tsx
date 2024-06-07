@@ -179,49 +179,6 @@ function Navbar() {
 
           {user?.username && (
             <>
-              {/* <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="My Profile">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt={user?.username.toUpperCase()}
-                      src="/static/images/avatar/2.jpg"
-                      sx={{
-                        backgroundColor: "primary.main",
-                        fontSize: "20px",
-                        width: 30,
-                        height: 30,
-                      }}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <Box onClick={handleCloseUserMenu}>
-                    <MenuItem>
-                      <Link href="/my-profile">
-                        <Typography>My Profile</Typography>
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Typography>Logout</Typography>
-                    </MenuItem>
-                  </Box>
-                </Menu>
-              </Box> */}
               <Box
                 sx={{
                   display: "flex",
@@ -310,12 +267,14 @@ function Navbar() {
                     Create A Trip
                   </MenuItem>
                 </Link>
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <ListItemIcon>
-                    <PostAddIcon />
-                  </ListItemIcon>
-                  Travel Posts
-                </MenuItem>
+                <Link href="/profile/travel-post">
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <ListItemIcon>
+                      <PostAddIcon />
+                    </ListItemIcon>
+                    Travel Posts
+                  </MenuItem>
+                </Link>
                 <Link href="/profile/travel-request">
                   <MenuItem onClick={handleCloseUserMenu}>
                     <ListItemIcon>

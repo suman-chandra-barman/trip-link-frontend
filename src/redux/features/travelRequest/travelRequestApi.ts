@@ -16,7 +16,7 @@ const travelRequestApi = baseApi.injectEndpoints({
     getUserTravelRequests: builder.query({
       query: () => {
         return {
-          url: `/travel-buddies/user/travel-request`,
+          url: `/travel-buddies/my/travel-request`,
           method: "GET",
         };
       },

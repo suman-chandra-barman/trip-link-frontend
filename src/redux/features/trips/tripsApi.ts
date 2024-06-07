@@ -15,6 +15,7 @@ const tripsApi = baseApi.injectEndpoints({
 
       invalidatesTags: ["trips"],
     }),
+
     getAllTrips: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -38,12 +39,23 @@ const tripsApi = baseApi.injectEndpoints({
       },
       providesTags: ["trips"],
     }),
+
     getSingleTrip: builder.query({
       query: (id) => ({
         url: `/trips/${id}`,
         method: "GET",
       }),
+      providesTags: ["trips"],
     }),
+
+    getMyTripPost: builder.query({
+      query: () => ({
+        url: "/trips/my/trip-post",
+        method: "GET",
+      }),
+      providesTags: ["trips"],
+    }),
+
     deleteTrip: builder.mutation({
       query: (id) => ({
         url: `/trips/${id}`,
@@ -59,4 +71,5 @@ export const {
   useGetAllTripsQuery,
   useGetSingleTripQuery,
   useDeleteTripMutation,
+  useGetMyTripPostQuery,
 } = tripsApi;

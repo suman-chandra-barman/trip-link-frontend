@@ -64,7 +64,7 @@ export default function TravelRequestPage() {
       </Box>
       {!data.length && (
         <Typography variant="h6" mb={2}>
-          You have not send any travel request!
+          You have no travel posts
         </Typography>
       )}
       <TableContainer component={Paper}>
