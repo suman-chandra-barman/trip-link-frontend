@@ -3,6 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 type TTBInputProps = {
   margin?: "normal" | "dense" | "none";
+  variant?: "outlined" | "filled" | "standard";
   name: string;
   label?: string;
   type?: string;
@@ -43,6 +44,7 @@ const TBInput = ({
   InputProps,
   defaultValue,
   rules,
+  variant = "outlined",
 }: TTBInputProps) => {
   const { control } = useFormContext();
   return (
@@ -56,7 +58,7 @@ const TBInput = ({
           {...field}
           label={label}
           type={type}
-          variant="outlined"
+          variant={variant}
           size={size}
           fullWidth={fullWidth}
           sx={sx}

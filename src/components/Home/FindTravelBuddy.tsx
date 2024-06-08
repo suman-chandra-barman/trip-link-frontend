@@ -1,5 +1,4 @@
 "use client";
-
 import { useGetAllTripsQuery } from "@/redux/features/trips/tripsApi";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
@@ -9,16 +8,20 @@ import { FieldValues } from "react-hook-form";
 import TBInput from "../Forms/TBInput";
 import TBForm from "../Forms/TBForm";
 import TBSelect from "../Forms/TBSelect";
+import Link from "next/link";
 
 const FindTravelBuddy = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
   const { data, isLoading } = useGetAllTripsQuery([...params]);
   const trips = data?.trips;
-  console.log({ data });
 
   const handleSearch = (values: FieldValues) => {
-    if (values?.destination) {
-      const value = [{ name: "searchTerm", value: values?.destination }];
+    if (values) {
+      const value = [
+        { name: "searchTerm", value: values?.searchTerm },
+        { name: "searchTerm", value: values?.travelType },
+        { name: "date", value: values?.date },
+      ];
       setParams(value);
     }
   };
@@ -44,32 +47,41 @@ const FindTravelBuddy = () => {
           Find your next Travel Buddy right here!
         </Typography>
 
-        <Stack direction="row" mt="30px" spacing={1} justifyContent="center">
+        <Stack direction="row" mt="30px" spacing={1}>
           <TBForm onSubmit={handleSearch}>
-            <Stack direction="row" justifyContent="center" spacing={2}>
-              <TBInput name="destination" placeholder="Enter destination" />
-              <TBInput
-                name="date"
-                type="date"
-                label="Date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <TBSelect
-                name="travelType"
-                label="Type of Travel"
-                items={["Adventure", "Leisure", "Business"]}
-              />
-              <TBInput
-                name="description"
-                placeholder="Search Keywords in Description"
-              />
-
-              <Button type="submit" sx={{ height: "56px" }}>
-                Search
-              </Button>
-            </Stack>
+            <Grid container spacing={2} justifyContent="start">
+              <Grid item xs={12} lg={12}>
+                <TBInput
+                  fullWidth
+                  size="small"
+                  name="searchTerm"
+                  variant="standard"
+                  placeholder="Where you want to go?"
+                />
+              </Grid>
+              <Grid item xs={12} lg={12}>
+                <Stack direction="row" spacing={2}>
+                  <TBSelect
+                    name="travelType"
+                    label="Type of Travel"
+                    size="small"
+                    items={["Adventure", "Leisure", "Business"]}
+                  />
+                  <TBInput
+                    name="date"
+                    type="date"
+                    label="Date"
+                    size="small"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <Button type="submit" size="small">
+                    Search
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
           </TBForm>
         </Stack>
 
@@ -84,7 +96,9 @@ const FindTravelBuddy = () => {
               </>
             ))}
           <Box textAlign="center" width="100%" mt={6}>
-            <Button>See More</Button>
+            <Link href="/trip">
+              <Button>See More</Button>
+            </Link>
           </Box>
         </Grid>
       </Container>
