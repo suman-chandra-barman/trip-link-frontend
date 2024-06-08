@@ -39,7 +39,8 @@ const TopDestination = () => {
     <Container
       maxWidth="xl"
       style={{
-        marginBottom: 50,
+        marginTop: 100,
+        marginBottom: 100,
       }}
     >
       <Typography
