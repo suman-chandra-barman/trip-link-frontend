@@ -2,17 +2,16 @@
 import React from "react";
 import { Box, Typography, Container } from "@mui/material";
 import { styled } from "@mui/system";
-import { TWhyWithUsData } from "../Home/WhyTravelWithUs";
+import { TTopDestinationData } from "../Home/TopDesitination";
 
-const WhyTravelWithUsCard = ({ data }: { data: TWhyWithUsData }) => {
+const TopDestinationCard = ({ data }: { data: TTopDestinationData }) => {
   const HeroContainer = styled(Box)({
     position: "relative",
-    height: "100vh",
+    height: "80vh",
     display: "flex",
     alignItems: "end",
     justifyContent: "center",
-    color: "#fff",
-    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${data?.image})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), url(${data?.image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     "&::before": {
@@ -35,10 +34,19 @@ const WhyTravelWithUsCard = ({ data }: { data: TWhyWithUsData }) => {
   return (
     <HeroContainer borderRadius={2}>
       <Container maxWidth="xl">
-        <HeroContent sx={{ paddingBottom: 2 }}>
-          <Typography variant="h6">{data?.title}</Typography>
-          <Typography component="p" color="gray">
-            {data?.description}
+        <HeroContent
+          sx={{
+            backgroundColor: "white",
+            borderRadius: "5px",
+            padding: "0px 10px",
+            marginBottom: 3,
+          }}
+        >
+          <Typography variant="h6" component="p" fontWeight={600}>
+            {data?.country}
+          </Typography>
+          <Typography component="p" fontWeight={600}>
+            {data?.totalTrips} Trips
           </Typography>
         </HeroContent>
       </Container>
@@ -46,4 +54,4 @@ const WhyTravelWithUsCard = ({ data }: { data: TWhyWithUsData }) => {
   );
 };
 
-export default WhyTravelWithUsCard;
+export default TopDestinationCard;
