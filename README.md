@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Trip Link
+## Overview
+
+TripLink is a web application designed to help travelers find compatible travel buddies for their adventures. Whether you're planning a solo trip and want to meet fellow travelers along the way or seeking companions for a specific trip, this application provides a platform to connect with like-minded individuals.
+
+## Live URL
+[Live Website URL](//trip-link.vercel.app/)
+
+## Backend Live URL
+[Backend_Live URL](https://trip-link-backend.vercel.app/)
+
+## Project Functionality Video
+Watch this video to understand the functionality of the Travel Buddy Matching application:
+[Project Functionality Video](https://drive.google.com/file/d/1Nk9B3v4ZlC6P9W8Hd5vUMm4Gc8LdxuW5/view?usp=sharing)
+
+## Login Credentials
+- ADMIN: username : sam_barman, email: sam@gmail.com,  password: 123456
+- USER:  max, email: max@gmail.com, password:123456
+
+## Features
+
+- **User Registration and Authentication:** Secure user registration and authentication using JWT (JSON Web Tokens).
+- **User Profiles:** Users can create and update their profiles, including details such as bio, age, and more.
+- **Trip Creation:** Users can create trips, specifying details such as destination, start and end dates, budget, and activities.
+- **Travel Buddy Requests:** Users can send and receive travel buddy requests for specific trips.
+- **Matching Algorithm:** Advanced algorithms match users based on compatibility factors like destination preferences, travel dates, and shared interests.
+- **Error Handling:** Proper error handling implemented throughout the application with informative error responses.
+- **API Endpoints:** RESTful API endpoints for various functionalities such as user registration, login, trip creation, buddy requests, and more.
+
+
+## Technology Stack
+
+- **Programming Language:** TypeScript
+- **Web Framework:** Next.js and MUI
+- **Authentication:** JWT (JSON Web Tokens)
+
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the Repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    ```
+    git clone https://github.com/your-username/triplink.git
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install Dependencies:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ```
+    cd triplink
+    npm install
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Set up Environment Variables:**
 
-## Learn More
+    Create a `.env` file in the root directory and add  environment variables:
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Start the Server:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```
+    npm run dev
+    ```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
