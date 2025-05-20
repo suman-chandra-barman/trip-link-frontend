@@ -12,7 +12,7 @@ const WhyTravelWithUsCard = ({ data }: { data: TWhyWithUsData }) => {
     alignItems: "end",
     justifyContent: "center",
     color: "#fff",
-    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${data?.image})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(21, 23, 29, 0) 35%, rgba(18, 18, 18) 77%), url(${data?.image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     "&::before": {
@@ -36,8 +36,16 @@ const WhyTravelWithUsCard = ({ data }: { data: TWhyWithUsData }) => {
     <HeroContainer borderRadius={2}>
       <Container maxWidth="xl">
         <HeroContent sx={{ paddingBottom: 2 }}>
-          <Typography variant="h6">{data?.title}</Typography>
-          <Typography component="p" color="gray">
+          <Typography variant="h5" fontWeight={600}>
+            {data?.title}
+          </Typography>
+          <Typography
+            component="p"
+            color="gray"
+            fontWeight={600}
+            fontSize={18}
+            mt={1}
+          >
             {data?.description}
           </Typography>
         </HeroContent>

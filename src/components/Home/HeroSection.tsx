@@ -2,7 +2,7 @@
 import React from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import { styled } from "@mui/system";
-import banner from "@/assets/images/banner.jpg";
+import banner from "@/assets/banner.jpg";
 import Link from "next/link";
 
 const HeroContainer = styled(Box)({
@@ -23,7 +23,7 @@ const HeroContainer = styled(Box)({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
     zIndex: 1,
   },
   zIndex: 2,
@@ -39,7 +39,6 @@ const HeroSection = () => {
     <HeroContainer>
       <Container maxWidth="xl">
         <HeroContent textAlign="center">
-          <Typography variant="h4">Welcome to TripLink</Typography>
           <Typography
             variant="h1"
             sx={{
@@ -47,7 +46,7 @@ const HeroSection = () => {
                 xs: "2rem",
                 sm: "3rem",
                 md: "4rem",
-                lg: "5rem",
+                lg: "6rem",
               },
               fontWeight: "bold",
             }}
@@ -56,7 +55,7 @@ const HeroSection = () => {
           </Typography>
           <Typography
             variant="h5"
-            sx={{ width: { sm: "100%", md: "70%" } }}
+            sx={{ width: { sm: "100%", md: "70%" }, fontWeight: 500 }}
             mx="auto"
           >
             Discover a new and authentic way of traveling. Find Travel Buddies

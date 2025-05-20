@@ -57,7 +57,6 @@ const TravelRequestPage = ({ params }: { params: { tripId: string } }) => {
       };
 
       const res = await sendTravelRequest(data);
-      console.log(res);
       if (res?.data) {
         toast.success("Request send successfully");
         router.push("/trip");
@@ -65,7 +64,7 @@ const TravelRequestPage = ({ params }: { params: { tripId: string } }) => {
         toast.error("Something went wrong");
       }
     } catch (error: any) {
-      console.log("error.message");
+      console.error("error.message");
     }
   };
 

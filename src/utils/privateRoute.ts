@@ -2,7 +2,6 @@
 import { getUserInfo } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { toast } from "sonner";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -10,7 +9,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const userInfo = getUserInfo();
-      console.log(userInfo);
     }
   }, []);
 

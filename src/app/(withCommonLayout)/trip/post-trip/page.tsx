@@ -1,19 +1,17 @@
 "use client";
+
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import TBForm from "@/components/Forms/TBForm";
 import TBInput from "@/components/Forms/TBInput";
 import TBSelect from "@/components/Forms/TBSelect";
 import TBFileUploader from "@/components/Forms/TBFileUploader";
 import { toast } from "sonner";
-import { TripValidationSchema } from "@/schemas/trip.validation";
 import uploadImageToImgBB from "@/utils/uploadImageToImgBB";
 import { useCreateTripMutation } from "@/redux/features/trips/tripsApi";
 import formatDateString from "@/utils/formatDateString";
-import { TAuthUser } from "@/types";
 import { isUserLoggedIn } from "@/services/auth.service";
 
 const tripTypes = ["Adventure", "Leisure", "Business"];
@@ -23,10 +21,17 @@ const TripCreatePage = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [itineraryDays, setItineraryDays] = useState(1);
+  const [isClient, setIsClient] = useState(false);
 
   const [createTrip, { isLoading }] = useCreateTripMutation();
-
   const router = useRouter();
+
+  useEffect(() => {
+    setIsClient(true);
+    if (!isUserLoggedIn() && isClient) {
+      router.push("/login");
+    }
+  }, [isClient, router]);
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -37,16 +42,12 @@ const TripCreatePage = () => {
     }
   }, [startDate, endDate]);
 
-  if (!isUserLoggedIn()) {
-    return router.push("/login");
-  }
-
   const handleCreateTrip = async (data: FieldValues) => {
     try {
       const { file, ...values } = data;
 
       let uploadedPhotos;
-      if (file.length) {
+      if (file?.length) {
         uploadedPhotos = await Promise.all(
           file?.map((file: File) => uploadImageToImgBB(file))
         );
@@ -70,6 +71,10 @@ const TripCreatePage = () => {
       setError("An error occurred while creating the trip");
     }
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <Container sx={{ marginTop: "100px", marginBottom: "50px" }}>
@@ -96,12 +101,7 @@ const TripCreatePage = () => {
             </Typography>
           )}
 
-          <TBForm
-            onSubmit={handleCreateTrip}
-            // resolver={zodResolver(
-            //   TripValidationSchema.createTripValidationSchema
-            // )}
-          >
+          <TBForm onSubmit={handleCreateTrip}>
             <Grid container spacing={2} my={2}>
               <Grid item lg={4}>
                 <TBInput name="destination" label="Destination" />

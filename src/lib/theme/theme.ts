@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#0a3f5f",
+      main: "#ffcc2a",
     },
     secondary: {
       main: "#666f73",
@@ -22,6 +22,7 @@ export const theme = createTheme({
           textTransform: "capitalize",
           fontSize: "16px",
           text: "#0a3f5f",
+          fontWeight: "bold",
         },
       },
     },

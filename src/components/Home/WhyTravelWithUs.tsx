@@ -13,17 +13,17 @@ const WhyTravelWithUs = () => {
       title: "Enjoy trips you cannot find anywhere else",
       description: "Explore hidden gems and off-the-beaten-path destinations.",
       image:
-        "https://res.cloudinary.com/dctipxdo4/image/upload/c_limit,w_2400/q_25,f_auto/lsepcjuze0ywhxdndqpd",
+        "https://res.cloudinary.com/dlywv3nys/image/upload/v1727069721/why_travel1_uertwm.jpg",
     },
     {
       title: "Know all your TripMates before you travel",
       description: "Connect with your future friends before the trip starts.",
       image:
-        "https://res.cloudinary.com/dctipxdo4/image/upload/c_limit,w_2400/q_25,f_auto/wfyyuwumbyykpaptq037",
+        "https://res.cloudinary.com/dlywv3nys/image/upload/v1727069726/why_travel2_wt8ous.jpg",
     },
     {
       title: "Unbeatable prices for smallest group sizes",
-      description: "No tour operator offers what you find on JoinMyTrip",
+      description: "No tour operator offers what you find on Trip Link",
       image:
         "https://res.cloudinary.com/dctipxdo4/image/upload/c_limit,w_2400/q_25,f_auto/agalwthobczh3h884dxb",
     },
@@ -32,8 +32,9 @@ const WhyTravelWithUs = () => {
   return (
     <Container
       maxWidth="xl"
-      style={{
-        marginBottom: 50,
+      sx={{
+        marginTop: "100px",
+        marginBottom: "100px",
       }}
     >
       <Typography
@@ -41,13 +42,12 @@ const WhyTravelWithUs = () => {
         variant="h3"
         fontWeight="600"
         textAlign="center"
-        mb={4}
+        mb={6}
         sx={{
           fontSize: {
             xs: "1.5rem",
             sm: "2rem",
             md: "2.5rem",
-            lg: "3rem",
           },
         }}
       >

@@ -38,9 +38,9 @@ const TopDestination = () => {
   return (
     <Container
       maxWidth="xl"
-      style={{
-        marginTop: 100,
-        marginBottom: 100,
+      sx={{
+        mt: "100px",
+        mb: "100px",
       }}
     >
       <Typography
@@ -48,13 +48,12 @@ const TopDestination = () => {
         variant="h3"
         fontWeight="600"
         textAlign="center"
-        mb={4}
+        mb={6}
         sx={{
           fontSize: {
             xs: "1.5rem",
             sm: "2rem",
             md: "2.5rem",
-            lg: "3rem",
           },
         }}
       >

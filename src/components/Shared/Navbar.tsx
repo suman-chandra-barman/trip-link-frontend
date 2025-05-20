@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import { deleteUser, getUserInfo } from "@/services/auth.service";
 import { TAuthUser } from "@/types";
-import { Divider, ListItemIcon } from "@mui/material";
+import { Button, Divider, ListItemIcon } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
 import LockIcon from "@mui/icons-material/Lock";
@@ -22,6 +23,8 @@ import HistoryIcon from "@mui/icons-material/History";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
+import logo from "@/assets/logo.png";
+import Image from "next/image";
 
 function Navbar() {
   const [user, setUser] = useState<TAuthUser>();
@@ -30,11 +33,14 @@ function Navbar() {
 
   const router = useRouter();
   const open = Boolean(anchorElUser);
+
+  //pages
   let pages = [
-    { route: "/", page: "Home" },
+    { route: "trip", page: "All Trips" },
+    { route: "trip/post-trip", page: "Create a Trip" },
     { route: "about", page: "About Us" },
     { route: "login", page: "Login" },
-    { route: "register", page: "Register" },
+    { route: "register", page: "Join TripLink" },
   ];
 
   useEffect(() => {
@@ -44,11 +50,11 @@ function Navbar() {
     }
   }, []);
 
-  //add page base user
+  //add page based on user
   if (user && user?.email) {
     pages = [
-      { route: "/", page: "Home" },
       { route: "trip", page: "All Trips" },
+      { route: "trip/post-trip", page: "Create A Trip" },
       { route: "about", page: "About Us" },
     ];
   }
@@ -70,37 +76,50 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  //logout
   const handleLogout = () => {
     deleteUser();
     router.push("/login");
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black", py: "5px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* logo  */}
           <Link href="/" style={{ color: "black", textDecoration: "none" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="p"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".1rem",
-                textDecoration: "none",
-                fontSize: "25px",
-              }}
+            <Box
+              justifyContent="center"
+              alignItems="center"
+              sx={{ display: "flex" }}
             >
-              Trip
-              <Box component="span" sx={{ color: "primary.main" }}>
-                Link
-              </Box>
-            </Typography>
+              <Image width={40} src={logo} alt="Logo" />
+              <Typography
+                variant="h6"
+                noWrap
+                component="p"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "cursive",
+                  fontWeight: 700,
+                  letterSpacing: ".1rem",
+                  textDecoration: "none",
+                  fontSize: "25px",
+                }}
+              >
+                Trip
+                <Box
+                  component="span"
+                  sx={{ color: "primary.main", fontFamily: "cursive" }}
+                >
+                  Link
+                </Box>
+              </Typography>
+            </Box>
           </Link>
 
+          {/* small device navbar start */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -161,12 +180,14 @@ function Navbar() {
               TripLink
             </Typography>
           </Link>
+          {/* small device navbar end */}
 
+          {/* medium device navbar start */}
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              justifyContent: "center",
+              justifyContent: "end",
               alignItems: "center",
             }}
           >
@@ -180,12 +201,18 @@ function Navbar() {
                   href={`/${page.route}`}
                   style={{ color: "black", textDecoration: "none" }}
                 >
-                  {page.page}
+                  {page.page == "Join TripLink" ? (
+                    <Button>Join</Button>
+                  ) : (
+                    page.page
+                  )}
                 </Link>
               </Typography>
             ))}
           </Box>
+          {/* medium device navbar end  */}
 
+          {/* User Profile */}
           {user?.username && (
             <>
               <Box
@@ -206,7 +233,7 @@ function Navbar() {
                   >
                     <Avatar
                       alt={user?.username.toUpperCase()}
-                      sx={{ width: 32, height: 32 }}
+                      sx={{ width: 32, height: 32, backgroundColor:"primary.main", color:"black", fontSize:"16px" }}
                     >
                       {user?.username.charAt(0).toUpperCase()}
                     </Avatar>

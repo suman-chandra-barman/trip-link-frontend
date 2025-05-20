@@ -1,10 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { Container, Typography, TextField, Button, Box } from "@mui/material";
-
 import { toast } from "sonner";
 import { useUpdateMyProfileMutation } from "@/redux/features/user/userApi";
+import { deleteUser } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+
 const EditProfilePage = () => {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [updateMyProfile] = useUpdateMyProfileMutation();
@@ -12,14 +16,27 @@ const EditProfilePage = () => {
   const handleEditProfile = async (e: any) => {
     e.preventDefault();
     const toastId = toast.loading("Updating...");
+
+    const data: { username?: string; email?: string } = {};
+
+    if (username && !email) {
+      data["username"] = username;
+    } else if (email && !username) {
+      data["email"] = email;
+    } else if (username && email) {
+      data["username"] = username;
+      data["email"] = email;
+    }
+
     try {
-      const res = await updateMyProfile({ username, email });
-      if (!res) {
+      const res = await updateMyProfile(data).unwrap();
+      if (!res?.id) {
         toast.error("Failed to update profile", { id: toastId });
       }
-      console.log("res", res);
-      if (res?.data?.success === true) {
+      if (res?.id) {
         toast.success("Profile updated successfully", { id: toastId });
+        deleteUser();
+        router.push("/login");
       }
     } catch (error) {
       toast.error("Failed to update profile", { id: toastId });

@@ -13,7 +13,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Footer = () => {
   return (
-    <Box sx={{ bgcolor: "primary.main", color: "white", pt: 6, pb: 4 }}>
+    <Box sx={{ bgcolor: "primary.main", pt: 6, pb: 4 }}>
       <Container maxWidth="xl">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6} lg={3}>

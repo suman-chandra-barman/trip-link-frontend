@@ -34,7 +34,7 @@ const TBForm = ({
 
   const submit: SubmitHandler<FieldValues> = (data) => {
     onSubmit(data);
-    // reset();
+    reset();
   };
 
   return (

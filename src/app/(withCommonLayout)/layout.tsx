@@ -6,7 +6,7 @@ const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Box>
       <Navbar />
-      <Box mt="65px">{children}</Box>
+      <Box mt="75px">{children}</Box>
       <Footer />
     </Box>
   );

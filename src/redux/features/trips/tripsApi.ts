@@ -22,7 +22,9 @@ const tripsApi = baseApi.injectEndpoints({
 
         if (args) {
           args.forEach((item: TQueryParam) => {
-            params.append(item.name, item.value as string);
+            if (item?.value) {
+              params.append(item.name, item.value as string);
+            }
           });
         }
         return {
@@ -56,6 +58,18 @@ const tripsApi = baseApi.injectEndpoints({
       providesTags: ["trips"],
     }),
 
+    updateTrip: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/trips/${data?.id}`,
+          method: "PUT",
+          contentType: "application/json",
+          data,
+        };
+      },
+      invalidatesTags: ["trips"],
+    }),
+
     deleteTrip: builder.mutation({
       query: (id) => ({
         url: `/trips/${id}`,
@@ -72,4 +86,5 @@ export const {
   useGetSingleTripQuery,
   useDeleteTripMutation,
   useGetMyTripPostQuery,
+  useUpdateTripMutation,
 } = tripsApi;

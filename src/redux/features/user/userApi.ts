@@ -9,12 +9,26 @@ const userApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+
     getMyProfile: builder.query({
       query: () => ({
         url: `/user/me`,
         method: "GET",
       }),
     }),
+
+    updateUser: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/user/update-user`,
+          method: "PUT",
+          contentType: "application/json",
+          data,
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+
     updateMyProfile: builder.mutation({
       query: (data) => {
         return {
@@ -26,13 +40,14 @@ const userApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["user"],
     }),
+
     changePassword: builder.mutation({
       query: (data) => {
         return {
           url: `/auth/change-password`,
           method: "POST",
           contentType: "application/json",
-          body: data,
+          data,
         };
       },
       invalidatesTags: ["user"],
@@ -42,6 +57,7 @@ const userApi = baseApi.injectEndpoints({
 
 export const {
   useGetMyProfileQuery,
+  useUpdateUserMutation,
   useUpdateMyProfileMutation,
   useChangePasswordMutation,
   useGetAllUsersQuery,

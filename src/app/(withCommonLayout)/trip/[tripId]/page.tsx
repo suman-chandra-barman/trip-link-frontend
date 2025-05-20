@@ -27,7 +27,6 @@ const TripDetailPage = ({ params }: { params: { tripId: string } }) => {
   const trip: TTrip = data;
   const startDate = dateConverter(trip?.startDate);
   const endDate = dateConverter(trip?.endDate);
-  console.log({ trip });
   if (isLoading) {
     return (
       <Stack

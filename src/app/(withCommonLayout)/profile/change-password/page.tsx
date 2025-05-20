@@ -9,6 +9,7 @@ import { FieldValues } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useChangePasswordMutation } from "@/redux/features/user/userApi";
+import { deleteUser } from "@/services/auth.service";
 
 const changePasswordValidationSchema = z.object({
   currentPassword: z.string({
@@ -30,6 +31,8 @@ const ChangePasswordPage = () => {
   const router = useRouter();
 
   const handleChangePassword = async (values: FieldValues) => {
+    const toastId = toast.loading("Password Changing...");
+
     const { currentPassword, newPassword, confirmPassword } = values;
 
     if (newPassword === confirmPassword) {
@@ -37,21 +40,20 @@ const ChangePasswordPage = () => {
         currentPassword,
         newPassword,
       };
-      console.log(data);
+
       try {
-        const res = await changePassword(data);
-        console.log(res);
-        // if (res.success) {
-        //   toast.success(res.message);
-        //   router.push("/login");
-        // } else {
-        //   setError(res.message);
-        // }
-      } catch (error: any) {
-        console.error(error);
+        const res = await changePassword(data).unwrap();
+        if (!res?.id) {
+          toast.error("Failed to change password", { id: toastId });
+        }
+        if (res?.id) {
+          toast.success("Password change successfully", { id: toastId });
+          deleteUser();
+          router.push("/login");
+        }
+      } catch (error) {
+        toast.error("Failed to change password", { id: toastId });
       }
-    } else {
-      setError("New password and confirm password not match!");
     }
   };
 

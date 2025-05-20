@@ -1,12 +1,11 @@
 "use client";
-
 import TripCard from "@/components/Cards/TripCard";
-import TBForm from "@/components/Forms/TBForm";
-import TBInput from "@/components/Forms/TBInput";
-import TBSelect from "@/components/Forms/TBSelect";
 import { useGetAllTripsQuery } from "@/redux/features/trips/tripsApi";
+import { useDebounced } from "@/redux/hooks";
 import { TQueryParam, TTrip } from "@/types";
+import { formatDateToISO } from "@/utils/formatDateToISO";
 import {
+  Autocomplete,
   Box,
   Button,
   CircularProgress,
@@ -16,17 +15,21 @@ import {
   Pagination,
   Select,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { FieldValues } from "react-hook-form";
+import { useEffect, useState } from "react";
 
 const TripPage = () => {
+  const [destination, setDestination] = useState("");
+  const [travelDates, setTravelDates] = useState("");
+  const [travelType, setTravelType] = useState("");
+
   const [params, setParams] = useState<TQueryParam[]>([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
 
-  const { data, isLoading } = useGetAllTripsQuery([
+  const { data, isLoading, refetch } = useGetAllTripsQuery([
     { name: "page", value: page },
     { name: "limit", value: limit },
     ...params,
@@ -39,10 +42,47 @@ const TripPage = () => {
     pageCount = Math.ceil(meta.total / limit);
   }
 
-  const handleSearch = (values: FieldValues) => {
-    if (values?.destination) {
-      const value = [{ name: "searchTerm", value: values?.destination }];
-      setParams(value);
+  const debouncedTerm = useDebounced({
+    searchQuery: destination,
+    delay: 600,
+  });
+
+  useEffect(() => {
+    if (debouncedTerm) {
+      setParams((prevParams) => {
+        const updatedParams = prevParams.filter(
+          (param) => param.name !== "searchTerm"
+        );
+        return [...updatedParams, { name: "searchTerm", value: debouncedTerm }];
+      });
+    }
+  }, [debouncedTerm]);
+
+  const handleSearch = () => {
+    try {
+      let formattedDate = "";
+      if (travelDates) {
+        const date = new Date(travelDates);
+        if (!isNaN(date.getTime())) {
+          formattedDate = formatDateToISO(travelDates);
+        } else {
+          throw new RangeError("Invalid date value");
+        }
+      }
+
+      const newParams = [
+        { name: "travelType", value: travelType },
+        { name: "travelDate", value: formattedDate },
+      ];
+      setParams((prevParams) => {
+        const filteredParams = prevParams.filter(
+          (param) => param.name !== "travelType" && param.name !== "travelDate"
+        );
+        return [...filteredParams, ...newParams];
+      });
+      refetch();
+    } catch (error: any) {
+      console.error(error?.message);
     }
   };
 
@@ -81,47 +121,50 @@ const TripPage = () => {
         </Typography>
       </Box>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4} sx={{ mt: "19px" }}>
-          <TBForm onSubmit={handleSearch}>
-            <Stack
-              direction="column"
-              mt="30px"
-              justifyContent="center"
-              spacing={2}
-            >
-              <TBInput
-                name="destination"
-                placeholder="Enter destination, country or city"
-              />
-              <TBInput
-                name="date"
-                type="date"
-                label="Date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <TBSelect
-                name="travelType"
-                label="Type of Travel"
-                items={["Adventure", "Leisure", "Business"]}
-              />
-              <TBInput
-                name="description"
-                placeholder="Search Keywords in Description"
-              />
-
-              <Button
-                type="submit"
-                // onClick={handleSearch}
-                sx={{ height: "56px" }}
-              >
-                Search
-              </Button>
-            </Stack>
-          </TBForm>
+        <Grid item xs={12} md={4} lg={3} sx={{ mt: "19px" }}>
+          <Stack
+            direction="column"
+            mt="30px"
+            justifyContent="center"
+            spacing={2}
+          >
+            <TextField
+              size="small"
+              name="searchTerm"
+              variant="standard"
+              placeholder="Where you want to go?"
+              fullWidth
+              onChange={(e) => setDestination(e.target.value)}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={["Adventure", "Leisure", "Business"]}
+              value={travelType}
+              defaultValue={travelType}
+              onChange={(e, newValue) => setTravelType(newValue as string)}
+              fullWidth
+              renderInput={(params) => (
+                <TextField {...params} label="Travel Type" />
+              )}
+            />
+            <TextField
+              type="date"
+              label="Date"
+              defaultValue={travelDates}
+              value={travelDates}
+              fullWidth
+              onChange={(e) => setTravelDates(e.target.value)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <Button size="small" onClick={handleSearch}>
+              Search
+            </Button>
+          </Stack>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} lg={9}>
           {/* Show trips */}
           <Grid container spacing={3} mt={3}>
             <Grid item lg={12} textAlign="center">
