@@ -14,41 +14,41 @@ export default function TripCard({ trip }: { trip: TTrip }) {
   const endDate = dateConverter(trip.endDate);
 
   return (
-    <Card sx={{ minHeight: 410 }}>
+    <Card sx={{ minHeight: 400 }}>
       <CardMedia
-        sx={{ height: 150 }}
+        sx={{ height: 200 }}
         image={trip?.photos[0]}
-        title="green iguana"
       />
-      <CardContent>
+      <CardContent sx={{padding:"10px"}}>
+        <Typography variant="p" component="h2">{trip.user.username}</Typography>
+        <Divider component="p" sx={{ margin: "10px 0" }} />
         <Typography
           variant="body2"
           color="text.secondary"
           textAlign="justify"
           sx={{ minHeight: 50, maxHeight: 70 }}
         >
-          {trip?.description.slice(0, 100)}
-          {" ...More"}
+          {trip?.description.slice(0, 95)}...
         </Typography>
-        <Divider component="p" sx={{ margin: "20px 0" }} />
-        <Stack direction="row" justifyContent="space-between">
+        <Divider component="p" sx={{ margin: "10px 0" }} />
+        <Stack direction="row" justifyContent="space-between" color="text.secondary">
           <Typography variant="body2" component="p">
             Destination:
           </Typography>
-          <Typography variant="body1" component="p" fontWeight={500}>
+          <Typography variant="body1" component="p" fontWeight={600}>
             {trip.destination}
           </Typography>
         </Stack>
-        <Stack direction="row" justifyContent="space-between" mt={1}>
+        <Stack direction="row" justifyContent="space-between" mt="5px" color="text.secondary">
           <Typography variant="body2" component="p">
             Dates:
           </Typography>
-          <Typography variant="body1" component="p" fontWeight={500}>
+          <Typography variant="body1" component="p" fontWeight={600}>
             {startDate} to {endDate}
           </Typography>
         </Stack>
       </CardContent>
-      <CardActions>
+      <CardActions  color="text.secondary">
         <Button size="medium" fullWidth href={`/trip/${trip.id}`}>
           View Details
         </Button>

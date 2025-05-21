@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -83,7 +82,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black", py: "5px"}}>
+    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* logo  */}
