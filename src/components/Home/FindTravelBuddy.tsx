@@ -164,7 +164,7 @@ const FindTravelBuddy = () => {
               </Link>
             </Box>
            </>
-           : <Box sx={{textAlign:"center", width:"100%"}}>Something went wrong, No Travel Budday Found!</Box>
+           : <Box color="text.secondary" sx={{textAlign:"center", width:"100%"}}>Something went wrong, No Travel Buddy Found!</Box>
           }
         </Grid>
       </Container>

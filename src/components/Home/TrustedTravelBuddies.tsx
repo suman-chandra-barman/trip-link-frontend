@@ -3,7 +3,7 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 const TrustedTravelBuddies = () => {
     return (
         <Container maxWidth="xl">
-            <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems="center" marginLeft={{md:10, lg: 20}} marginRight={{md:10, lg: 20}}>
+            <Stack direction={{xs: 'column', md: 'row'}} spacing={4} alignItems="center" marginLeft={{md:10, lg: 20}} marginRight={{md:10, lg: 20}}>
                 {/* Left Column - Text */}
                 <Box sx={{ flex: 1,}}>
                     <Typography variant="h3" component="h3" fontWeight="600" sx={{
