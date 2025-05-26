@@ -35,7 +35,7 @@ const TrustedTravelBuddies = () => {
                 >
                     <Box
                         component="img"
-                        src="https://optim.tildacdn.net/tild6265-3466-4130-a363-393664306335/-/format/webp/JMT_Find_Travel_Budd.jpg.webp"
+                        src="https://res.cloudinary.com/dlywv3nys/image/upload/v1748235592/JMT_Find_Travel_Budd.jpg-ezgif.com-webp-to-jpg-converter_ook08m.jpg"
                         alt="Travel"
                         sx={{
                             width: '100%',
@@ -62,7 +62,7 @@ const TrustedTravelBuddies = () => {
                 >
                     <Box
                         component="img"
-                        src="https://optim.tildacdn.net/tild3230-6630-4566-a538-353535373561/-/format/webp/JMT_Find_Travel_Budd.jpg.webp"
+                        src="https://res.cloudinary.com/dlywv3nys/image/upload/v1748235466/JMT_Find_Travel_Budd.jpg_kwqn3s.jpg"
                         alt="Travel"
                         sx={{
                             width: '100%',
