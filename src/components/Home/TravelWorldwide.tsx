@@ -38,10 +38,17 @@ const TravelWorldwide = () => {
       </Box>
       <Box mt={6} textAlign="center">
         <Link
+<<<<<<< HEAD
+          href="/register"
+          style={{ color: "white", textDecoration: "none" }}
+        >
+          <Button size="large">Join</Button>
+=======
           href="/trip"
           style={{ color: "white", textDecoration: "none" }}
         >
           <Button size="large">Find Trips</Button>
+>>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
         </Link>
       </Box>
     </Box>
@@ -49,3 +56,37 @@ const TravelWorldwide = () => {
 };
 
 export default TravelWorldwide;
+<<<<<<< HEAD
+
+// import { Box, Button, Typography } from "@mui/material";
+// import Image from "next/image";
+// import image from "@/assets/images/travel_world.png";
+// import banner from "@/assets/images/travel_world_banner.jpeg";
+
+// const TravelWorldwide = () => {
+//   return (
+//     <Box
+//       sx={{
+//         padding: { sm: 4, md: 8 },
+//         backgroundImage: `url(${banner.src})`,
+//       }}
+//     >
+//       <Box sx={{ backgroundColor: "primary.main" }}>
+//         <Box sx={{ display: "flex", justifyContent: "center" }}>
+//           <Image width={500} src={image} alt="Find travel worldwide" />
+//         </Box>
+//         <Box textAlign="center">
+//           <Typography variant="h5" fontWeight="bold" mt={3} mb={3}>
+//             Travel the world together using our website - find your travel
+//             partner
+//           </Typography>
+//           <Button>Join Now</Button>
+//         </Box>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default TravelWorldwide;
+=======
+>>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8

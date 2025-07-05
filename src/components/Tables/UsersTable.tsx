@@ -79,7 +79,11 @@ const UsersTable = () => {
       >
         <Table sx={{ minWidth: 600 }}>
           <TableHead>
+<<<<<<< HEAD
+            <TableRow sx={{ backgroundColor: "primary.main" }}>
+=======
             <TableRow sx={{ backgroundColor: "secondary.main" }}>
+>>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
               <TableCell sx={{ color: "#ffffff", fontWeight: 600 }}>
                 Username & Email
               </TableCell>

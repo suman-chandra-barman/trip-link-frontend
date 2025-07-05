@@ -93,11 +93,16 @@ const RegisterPage = () => {
           <Typography
             variant="h5"
             component="h2"
-            textAlign="center"
             fontWeight={600}
-            my={1}
+            textAlign="center"
           >
-            TripLink Register
+            Create an Account
+          </Typography>
+          <Typography
+            mb={1}
+            textAlign={"center"}
+          >
+            Sign up to get started
           </Typography>
 
           {error && (
@@ -123,30 +128,30 @@ const RegisterPage = () => {
             resolver={zodResolver(registerValidationSchema)}
           >
             <Grid container spacing={2} my={2}>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBInput name="username" label="Username" />
               </Grid>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBInput name="email" label="Email" type="email" />
               </Grid>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBInput name="password" label="Password" type="password" />
               </Grid>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBInput
                   name="confirmPassword"
                   label="Confirm Password"
                   type="password"
                 />
               </Grid>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBInput
                   name="profile.contactNumber"
                   label="Contract Number"
                   type="tel"
                 />
               </Grid>
-              <Grid item lg={6}>
+              <Grid item md={6} sm={12} xs={12}>
                 <TBSelect
                   name="profile.gender"
                   label="Gender"

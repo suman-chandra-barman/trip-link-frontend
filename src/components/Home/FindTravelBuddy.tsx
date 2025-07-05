@@ -150,11 +150,18 @@ const FindTravelBuddy = () => {
           </Grid>
         </Stack>
 
+<<<<<<< HEAD
+        <Grid container spacing={3} mt={3}>
+          {trips &&
+            trips.slice(0, 10).map((trip: TTrip, idx: number) => (
+              <Grid key={idx} item xs={12} md={4}>
+=======
         <Grid container spacing={2} mt={3}>
           {trips ?
            <>
             {trips.slice(0, 10).map((trip: TTrip, idx: number) => (
               <Grid key={idx} item xs={12} md={3}>
+>>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
                 <TripCard trip={trip} />
               </Grid>
             ))}
