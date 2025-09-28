@@ -20,8 +20,6 @@ import { z } from "zod";
 import userLogin from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.service";
 import { toast } from "sonner";
-import TBModal from "@/components/Modals/TBModal";
-import DemoLoginCredentialModal from "@/components/DemoLoginCredential/DemoLoginCredentialModal";
 
 const loginValidationSchema = z.object({
   usernameOrEmail: z.string({
@@ -55,12 +53,6 @@ const LoginPage = () => {
     }
   };
 
-<<<<<<< HEAD
-=======
-  const handleClickOpen = () => {
-    setLoginCredentialModal(true);
-  };
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
 
   return (
     <Container>
@@ -91,8 +83,7 @@ const LoginPage = () => {
           }}
         >
           <Typography
-            variant="h5"
-            component="h2"
+            variant="h4"
             fontWeight={600}
             textAlign="center"
           >
@@ -148,13 +139,8 @@ const LoginPage = () => {
             onSubmit={handleLogin}
             resolver={zodResolver(loginValidationSchema)}
           >
-<<<<<<< HEAD
             <Grid container spacing={1} mb={1} mt={0.5}>
               <Grid item xs={12}>
-=======
-            <Grid container spacing={2} my={2}>
-              <Grid item lg={12}>
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
                 <TBInput name="usernameOrEmail" label="Username or Email" />
               </Grid>
               <Grid item xs={12}>
@@ -171,23 +157,6 @@ const LoginPage = () => {
               Login
             </Button>
           </TBForm>
-          <Divider sx={{ mt: 1 }}>
-            <Chip label="OR" size="small" />
-          </Divider>
-          <Button
-            fullWidth
-            variant="outlined"
-            sx={{ mt: 2, mb: 1}}
-            onClick={handleClickOpen}
-          >
-            Show Demo Credentials
-          </Button>
-          {
-            <DemoLoginCredentialModal
-              open={openLoginCredentialModal}
-              setOpen={setLoginCredentialModal}
-            />
-          }
           <Typography
             sx={{
               textAlign: "center",

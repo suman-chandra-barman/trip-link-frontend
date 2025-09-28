@@ -150,18 +150,10 @@ const FindTravelBuddy = () => {
           </Grid>
         </Stack>
 
-<<<<<<< HEAD
         <Grid container spacing={3} mt={3}>
           {trips &&
             trips.slice(0, 10).map((trip: TTrip, idx: number) => (
               <Grid key={idx} item xs={12} md={4}>
-=======
-        <Grid container spacing={2} mt={3}>
-          {trips ?
-           <>
-            {trips.slice(0, 10).map((trip: TTrip, idx: number) => (
-              <Grid key={idx} item xs={12} md={3}>
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
                 <TripCard trip={trip} />
               </Grid>
             ))}
@@ -170,9 +162,9 @@ const FindTravelBuddy = () => {
                 <Button>See More</Button>
               </Link>
             </Box>
-           </>
-           : <Box color="text.secondary" sx={{textAlign:"center", width:"100%"}}>Something went wrong, No Travel Buddy Found!</Box>
-          }
+           {/* </>
+           : <Box color="text.secondary" sx={{textAlign:"center", width:"100%"}}>Something went wrong, No Travel Buddy Found!</Box> */}
+          {/* } */}
         </Grid>
       </Container>
     </Box>

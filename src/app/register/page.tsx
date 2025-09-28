@@ -91,8 +91,7 @@ const RegisterPage = () => {
           }}
         >
           <Typography
-            variant="h5"
-            component="h2"
+            variant="h4"
             fontWeight={600}
             textAlign="center"
           >

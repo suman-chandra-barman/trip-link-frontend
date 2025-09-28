@@ -38,17 +38,10 @@ const TravelWorldwide = () => {
       </Box>
       <Box mt={6} textAlign="center">
         <Link
-<<<<<<< HEAD
           href="/register"
           style={{ color: "white", textDecoration: "none" }}
         >
           <Button size="large">Join</Button>
-=======
-          href="/trip"
-          style={{ color: "white", textDecoration: "none" }}
-        >
-          <Button size="large">Find Trips</Button>
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
         </Link>
       </Box>
     </Box>
@@ -56,7 +49,6 @@ const TravelWorldwide = () => {
 };
 
 export default TravelWorldwide;
-<<<<<<< HEAD
 
 // import { Box, Button, Typography } from "@mui/material";
 // import Image from "next/image";
@@ -88,5 +80,3 @@ export default TravelWorldwide;
 // };
 
 // export default TravelWorldwide;
-=======
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8

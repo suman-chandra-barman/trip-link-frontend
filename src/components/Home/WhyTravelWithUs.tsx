@@ -23,11 +23,7 @@ const WhyTravelWithUs = () => {
     },
     {
       title: "Unbeatable prices for smallest group sizes",
-<<<<<<< HEAD
       description: "No tour operator offers what you find on TripLink",
-=======
-      description: "No tour operator offers what you find on Trip Link",
->>>>>>> 1f64f29f96b17cb5712727567b46d8453032abb8
       image:
         "https://res.cloudinary.com/dctipxdo4/image/upload/c_limit,w_2400/q_25,f_auto/agalwthobczh3h884dxb",
     },
