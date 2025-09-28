@@ -83,7 +83,15 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black"}}>
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: "white",
+        color: "black",
+        boxShadow: "none",
+        height: "80px",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* logo  */}
@@ -233,7 +241,13 @@ function Navbar() {
                   >
                     <Avatar
                       alt={user?.username.toUpperCase()}
-                      sx={{ width: 32, height: 32, backgroundColor:"primary.main", color:"black", fontSize:"16px" }}
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        backgroundColor: "primary.main",
+                        color: "black",
+                        fontSize: "16px",
+                      }}
                     >
                       {user?.username.charAt(0).toUpperCase()}
                     </Avatar>
