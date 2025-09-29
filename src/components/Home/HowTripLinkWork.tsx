@@ -66,7 +66,7 @@ const HowTripLinkWork = () => {
       {/* cards */}
       <Grid container spacing={2}>
         {data?.map((item, idx) => (
-          <Grid key={idx} item xs={12} md={4} lg={3}>
+          <Grid key={idx} item xs={12} sm={6} lg={3}>
             <HowTripLinkWorkCard data={item} />
           </Grid>
         ))}
