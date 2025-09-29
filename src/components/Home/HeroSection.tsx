@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { EffectFade, Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
 const HeroSection = () => {
   const banners = [banner1, banner2, banner3, banner4];
@@ -56,12 +57,12 @@ const HeroSection = () => {
         sx={{
           marginBottom: "32px",
           fontSize: { xs: "1rem", md: "1.5rem" },
-          maxWidth: "600px",
+          maxWidth: "750px",
         }}
       >
         {slideContent.subtitle}
       </Typography>
-      <Button>{slideContent.buttonText}</Button>
+      <PrimaryButton btnName={slideContent.buttonText} />
     </Box>
   );
 
