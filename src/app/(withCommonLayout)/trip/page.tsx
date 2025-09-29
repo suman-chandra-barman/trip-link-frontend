@@ -86,6 +86,8 @@ const TripPage = () => {
     }
   };
 
+  console.log("trips", trips)
+
   return (
     <Container maxWidth="xl" style={{ marginTop: 100, marginBottom: 30 }}>
       <Box>

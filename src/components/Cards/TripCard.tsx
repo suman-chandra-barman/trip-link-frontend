@@ -9,18 +9,21 @@ import { TTrip } from "@/types";
 import { Divider, Stack } from "@mui/material";
 import { dateConverter } from "@/utils/dateConverter";
 
-export default function TripCard({ trip }: { trip: TTrip }) {
+export default function TripCard({
+  trip,
+}: {
+  trip: TTrip & { user?: { username: string } };
+}) {
   const startDate = dateConverter(trip.startDate);
   const endDate = dateConverter(trip.endDate);
 
   return (
     <Card sx={{ minHeight: 400 }}>
-      <CardMedia
-        sx={{ height: 200 }}
-        image={trip?.photos[0]}
-      />
-      <CardContent sx={{padding:"10px"}}>
-        <Typography variant="p" component="h2">{trip.user.username}</Typography>
+      <CardMedia sx={{ height: 200 }} image={trip?.photos[0]} />
+      <CardContent sx={{ padding: "10px" }}>
+        <Typography variant="body1" component="h2">
+          {trip.user?.username}
+        </Typography>
         <Divider component="p" sx={{ margin: "10px 0" }} />
         <Typography
           variant="body2"
@@ -31,7 +34,11 @@ export default function TripCard({ trip }: { trip: TTrip }) {
           {trip?.description.slice(0, 95)}...
         </Typography>
         <Divider component="p" sx={{ margin: "10px 0" }} />
-        <Stack direction="row" justifyContent="space-between" color="text.secondary">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          color="text.secondary"
+        >
           <Typography variant="body2" component="p">
             Destination:
           </Typography>
@@ -39,7 +46,12 @@ export default function TripCard({ trip }: { trip: TTrip }) {
             {trip.destination}
           </Typography>
         </Stack>
-        <Stack direction="row" justifyContent="space-between" mt="5px" color="text.secondary">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          mt="5px"
+          color="text.secondary"
+        >
           <Typography variant="body2" component="p">
             Dates:
           </Typography>
@@ -48,7 +60,7 @@ export default function TripCard({ trip }: { trip: TTrip }) {
           </Typography>
         </Stack>
       </CardContent>
-      <CardActions  color="text.secondary">
+      <CardActions color="text.secondary">
         <Button size="medium" fullWidth href={`/trip/${trip.id}`}>
           View Details
         </Button>
