@@ -6,11 +6,10 @@ const HowTripLinkWorkCard = ({ data }: { data: THowTripLinkWorksData }) => {
     <Box
       textAlign="center"
       sx={{
-        backgroundColor: "rgba(255, 249, 208, 0.5)",
+        backgroundColor: "rgba(229, 229, 229, 0.5)",
         padding: "16px",
         height: 220,
-        boxShadow: "0px 5px 10px lightgray",
-        borderRadius: "4px",
+        borderRadius: "10px",
       }}
     >
       {data.icon}
