@@ -25,6 +25,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
 import logo from "@/assets/logo.png";
 import Image from "next/image";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
 function Navbar() {
   const [user, setUser] = useState<TAuthUser>();
@@ -83,7 +84,15 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black"}}>
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: "white",
+        color: "black",
+        boxShadow: "none",
+        height: "75px",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* logo  */}
@@ -202,7 +211,7 @@ function Navbar() {
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   {page.page == "Join TripLink" ? (
-                    <Button>Join</Button>
+                    <PrimaryButton btnName="Join" />
                   ) : (
                     page.page
                   )}
@@ -233,7 +242,13 @@ function Navbar() {
                   >
                     <Avatar
                       alt={user?.username.toUpperCase()}
-                      sx={{ width: 32, height: 32, backgroundColor:"primary.main", color:"black", fontSize:"16px" }}
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        backgroundColor: "primary.main",
+                        color: "black",
+                        fontSize: "16px",
+                      }}
                     >
                       {user?.username.charAt(0).toUpperCase()}
                     </Avatar>

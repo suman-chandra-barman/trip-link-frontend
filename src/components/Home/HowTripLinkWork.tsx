@@ -42,8 +42,8 @@ const HowTripLinkWork = () => {
     <Container
       maxWidth="xl"
       sx={{
-        marginTop: "100px",
-        marginBottom: "100px",
+        marginTop: "60px",
+        marginBottom: "60px",
       }}
     >
       <Typography
@@ -64,9 +64,9 @@ const HowTripLinkWork = () => {
       </Typography>
 
       {/* cards */}
-      <Grid container spacing={1}>
+      <Grid container spacing={2}>
         {data?.map((item, idx) => (
-          <Grid key={idx} item xs={12} md={4} lg={3}>
+          <Grid key={idx} item xs={12} sm={6} lg={3}>
             <HowTripLinkWorkCard data={item} />
           </Grid>
         ))}
