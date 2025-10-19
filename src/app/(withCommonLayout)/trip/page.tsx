@@ -113,7 +113,6 @@ const TripPage = () => {
           sx={{
             fontSize: {
               xs: "1.5rem",
-              md: "2rem",
             },
           }}
         >
@@ -205,7 +204,7 @@ const TripPage = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <CircularProgress color="success" />
+                <CircularProgress />
               </Stack>
             )}
             {trips?.length &&
