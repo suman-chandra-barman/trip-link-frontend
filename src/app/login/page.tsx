@@ -53,20 +53,19 @@ const LoginPage = () => {
     }
   };
 
-
   return (
     <Container>
       <Typography
-            sx={{
-             mt:7,
-             fontWeight: 500,
-              "& a": {
-                color: "primary.main",
-              }
-            }}
-          >
-            <Link href="/">BACK TO HOMEPAGE</Link>
-          </Typography>
+        sx={{
+          mt: 7,
+          fontWeight: 500,
+          "& a": {
+            color: "primary.main",
+          },
+        }}
+      >
+        <Link href="/">BACK TO HOMEPAGE</Link>
+      </Typography>
       <Stack
         sx={{
           justifyContent: "center",
@@ -82,17 +81,10 @@ const LoginPage = () => {
             p: 4,
           }}
         >
-          <Typography
-            variant="h4"
-            fontWeight={600}
-            textAlign="center"
-          >
+          <Typography variant="h4" fontWeight={600} textAlign="center">
             Login
           </Typography>
-          <Typography
-            mb={1}
-            textAlign={"center"}
-          >
+          <Typography mb={1} textAlign={"center"}>
             Access your account
           </Typography>
           {error && (
@@ -114,26 +106,35 @@ const LoginPage = () => {
           {/* Demo Credentials */}
           <Box mb={2} mt={3}>
             <Typography fontWeight={700}>Demo Credentials:</Typography>
-            <Box sx={{ display: "flex", gap:2, mt: 1}}>
-                <Button 
-                  onClick={() => handleLogin({password: "123456", usernameOrEmail: "sam_barman"})}
-                  sx={{width:"50%" }}
-                 >
-                  Login as Admin
-                </Button>
-                <Button 
-                  onClick={() => handleLogin({password: "123456", usernameOrEmail: "max"})}
-                  sx={{width:"50%" }}
-                 >
-                  Login as User
-                </Button>
+            <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  handleLogin({
+                    password: "123456",
+                    usernameOrEmail: "sam_barman",
+                  })
+                }
+                sx={{ width: "50%", borderRadius: "25px" }}
+              >
+                Login as Admin
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  handleLogin({ password: "123456", usernameOrEmail: "max" })
+                }
+                sx={{ width: "50%", borderRadius: "25px" }}
+              >
+                Login as User
+              </Button>
             </Box>
           </Box>
 
           <Divider sx={{ mt: 1 }}>
             <Chip label="OR" size="small" />
           </Divider>
-          
+
           {/* Form Section  */}
           <TBForm
             onSubmit={handleLogin}
@@ -152,6 +153,7 @@ const LoginPage = () => {
               type="submit"
               sx={{
                 my: 1,
+                borderRadius: "25px",
               }}
             >
               Login
@@ -160,7 +162,7 @@ const LoginPage = () => {
           <Typography
             sx={{
               textAlign: "center",
-              color:"black",
+              color: "black",
               mt: 1,
               "& a": {
                 color: "black",

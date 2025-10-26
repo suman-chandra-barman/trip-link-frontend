@@ -163,6 +163,7 @@ const RegisterPage = () => {
               type="submit"
               sx={{
                 my: 1,
+                borderRadius:"25px"
               }}
             >
               Register
