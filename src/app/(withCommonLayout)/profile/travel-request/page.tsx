@@ -49,7 +49,7 @@ export default function TravelRequestPage() {
         justifyContent="center"
         alignItems="center"
       >
-        <CircularProgress color="success" />
+        <CircularProgress color="primary" />
       </Stack>
     );
   }

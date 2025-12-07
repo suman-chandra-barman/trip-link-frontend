@@ -30,7 +30,7 @@ const FindTravelBuddy = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <CircularProgress color="success" />
+        <CircularProgress color="primary" />
       </Stack>
     );
   }

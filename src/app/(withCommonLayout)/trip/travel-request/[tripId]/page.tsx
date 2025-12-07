@@ -37,7 +37,7 @@ const TravelRequestPage = ({ params }: { params: { tripId: string } }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <CircularProgress color="success" />
+        <CircularProgress color="primary" />
       </Stack>
     );
   }
