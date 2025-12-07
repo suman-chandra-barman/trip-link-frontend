@@ -61,7 +61,7 @@ export default function TripCard({
         </Stack>
       </CardContent>
       <CardActions color="text.secondary">
-        <Button size="medium" fullWidth href={`/trip/${trip.id}`}>
+        <Button size="medium" fullWidth href={`/trip/${trip.id}`} style={{borderRadius: "50px"}}>
           View Details
         </Button>
       </CardActions>
