@@ -22,6 +22,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import UserRoleModal from "../Dashboard/UserRoleModal";
 import UserStatusChangeModal from "../Dashboard/UserStatusModal";
+import { toast } from "sonner";
 
 const UsersTable = () => {
   const [openUserRoleModal, setOpenUserRoleModal] = useState(false);
@@ -41,15 +42,15 @@ const UsersTable = () => {
   };
 
   const handleDelete = async (id: string) => {
-    // const toastId = toast.loading("Deleting trip...");
-    // try {
-    //   const res = await deleteTrip(id).unwrap();
-    //   if (res?.id) {
-    //     toast.success("Trip deleted successfully", { id: toastId });
-    //   }
-    // } catch (error) {
-    //   toast.error("Failed to delete trip", { id: toastId });
-    // }
+    const toastId = toast.loading("Deleting trip...");
+    try {
+      const res = await deleteTrip(id).unwrap();
+      if (res?.id) {
+        toast.success("Trip deleted successfully", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("Failed to delete trip", { id: toastId });
+    }
   };
 
   if (isLoading) {
@@ -91,9 +92,9 @@ const UsersTable = () => {
                 Status
               </TableCell>
 
-              {/* <TableCell sx={{ color: "#ffffff", fontWeight: 600 }}>
+              <TableCell sx={{ color: "#ffffff", fontWeight: 600 }}>
                 Actions
-              </TableCell> */}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -124,6 +125,7 @@ const UsersTable = () => {
                           sx={{
                             px: 1,
                             width: 95,
+                            borderRadius: "50px",
                           }}
                           startIcon={<EditIcon />}
                           onClick={() => handleUserRole(user?.id)}
@@ -140,7 +142,7 @@ const UsersTable = () => {
                           color={
                             user?.status === "ACTIVE" ? "primary" : "error"
                           }
-                          sx={{ px: 1, width: 100 }}
+                          sx={{ px: 1, width: 100, borderRadius: "50px" }}
                           startIcon={<EditIcon />}
                           onClick={() => handleUserStatus(user?.id)}
                         >
@@ -149,7 +151,7 @@ const UsersTable = () => {
                       </Tooltip>
                     </TableCell>
 
-                    {/* <TableCell>
+                    <TableCell>
                       <IconButton
                         size="small"
                         color="error"
@@ -157,7 +159,7 @@ const UsersTable = () => {
                       >
                         <DeleteIcon />
                       </IconButton>
-                    </TableCell> */}
+                    </TableCell>
                   </TableRow>
                 );
               })}
