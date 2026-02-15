@@ -30,13 +30,11 @@ const loginValidationSchema = z.object({
 
 const LoginPage = () => {
   const [error, setError] = useState("");
-  const [openLoginCredentialModal, setLoginCredentialModal] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (data: FieldValues) => {
     const toastId = toast.loading("Login...");
     try {
-      console.log("Login data:", data);
       const res = await userLogin(data);
       if (res.success) {
         toast.success("Login successfully", { id: toastId });
